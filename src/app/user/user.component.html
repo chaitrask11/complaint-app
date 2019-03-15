@@ -1,0 +1,39 @@
+  <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="#">User</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Create Ticket Form</li>
+      </ol>
+    </nav>
+
+    
+<div class="row">
+    <div class="col-md-5">
+      <form [formGroup]="this.customerService.form" (ngSubmit)="onSubmit()">
+        <input type="hidden" formControlName="$key">
+        <div class="form-group">
+          <label>Title</label>
+          <input formControlName="title" class="form-control" [ngClass]="{'is-invalid':submitted && formControls.fullName.errors}">
+          <div class="invalid-feedback" *ngIf="submitted && formControls.title.errors">
+            This field is required.</div>
+        </div>
+
+        <div class="form-group">
+          <label>Date</label>
+          <input type="date" formControlName="date" class="form-control" >
+        </div>
+        <div class="form-group">
+          <label>comments</label>
+          <textarea rows="3" formControlName="comment" class="form-control"></textarea>
+        </div>
+        <div class="form-group">
+          <input type="submit" class="btn btn-primary" value="Submit">
+        </div>
+      </form>
+      <div class="alert alert-info"  *ngIf="showSuccessMessage">
+        Submitted successfully.
+      </div>
+    </div>
+    <div class="col-md-7">
+        <app-complaint-list [roleData]="role"></app-complaint-list>
+    </div>
+  </div>

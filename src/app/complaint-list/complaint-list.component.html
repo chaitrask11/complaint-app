@@ -1,0 +1,38 @@
+  <table class="table table-sm">
+    <thead>
+      <th>ID</th>
+      <th>Title</th>
+      <th>Date</th>
+      <th>Comment</th>
+      <th>Replay</th>
+      <th>Status</th>
+      <th>Action</th>
+      <th>Delete</th>
+    </thead>
+    <ng-container *ngFor="let customer of customerArray; index as i">
+      <tr class="table-dark">
+        <td>{{i+1}}</td>
+        <td>{{customer.title}}</td>
+        <td>{{customer.date}}</td>
+        <td>{{customer.comment}}</td>
+        <td>{{customer.replay}}</td>
+        <td>
+         
+          <button type="button" *ngIf="customer.selectedStatus == 'Not_Started'" class="btn btn-info"> {{customer.selectedStatus}}</button>
+          <button type="button" *ngIf="customer.selectedStatus == 'In_Progress'" class="btn btn-primary"> {{customer.selectedStatus}}</button>
+          <button type="button" *ngIf="customer.selectedStatus == 'Completed'" class="btn btn-success"> {{customer.selectedStatus}}</button>
+        </td>
+          <td>
+            <button class="btn btn-outline-info" *ngIf="roleData == 'user'" (click)="customerService.populateForm(customer)">Update Ticket</button>
+            <button class="btn btn-outline-info" *ngIf="roleData == 'admin'" (click)="customerService.populateForm(customer)">Update status</button>
+          </td>
+          <td>
+              <button class="btn btn-outline-danger" (click)="onDelete(customer.$key)">Delete</button>
+            </td>
+      </tr>
+    </ng-container>
+  </table>
+  <div class="alert alert-danger" *ngIf="showDeletedMessage">
+    Deleted successfully.
+  </div>
+  
