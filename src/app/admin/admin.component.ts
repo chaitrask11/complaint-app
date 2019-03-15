@@ -23,21 +23,40 @@ export class AdminComponent implements OnInit {
     }
 
 
-    onSubmit() {
+   /**  onSubmit() {
         this.submitted = true;
         if (this.customerService.form.valid) {
-          if (this.customerService.form.get('$key').value == null){
+          if (this.customerService.form.get('$key').value == null)
           //  this.customerService.insertCustomer(this.customerService.form.value);
           alert("please click on Update status button");
-          return true;
-          }
-          else{
+          else
           this.customerService.updateCustomer(this.customerService.form.value);
           this.showSuccessMessage = true;
           setTimeout(() => this.showSuccessMessage = false, 3000);
           this.submitted = false;
           this.customerService.form.reset();
-          }
+          
+          //this is to be done for proper reset operation
+          this.customerService.form.setValue({
+            $key: null,
+            selectedStatus:'',
+            replay: ''
+          });
+        }
+      }*/
+
+      onSubmit() {
+        this.submitted = true;
+        if (this.customerService.form.valid) {
+          if (this.customerService.form.get('$key').value == null)
+          //  this.customerService.insertCustomer(this.customerService.form.value);
+          alert("please click on update status button");
+          else
+            this.customerService.updateCustomer(this.customerService.form.value);
+          this.showSuccessMessage = true;
+          setTimeout(() => this.showSuccessMessage = false, 3000);
+          this.submitted = false;
+          this.customerService.form.reset();
           //this is to be done for proper reset operation
           this.customerService.form.setValue({
             $key: null,
